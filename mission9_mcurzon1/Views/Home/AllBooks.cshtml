@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "All Books";
+}
+@model List<Book>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>BookID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>ISBN</th>
+            <th>Classification</th>
+            <th>Category</th>
+            <th>PageCount</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Book i in Model)
+        {
+            <tr>
+                <td>@i.BookId</td>
+                <td>@i.Title</td>
+                <td>@i.Author</td>
+                <td>@i.Publisher</td>
+                <td>@i.Isbn</td>
+                <td>@i.Classification</td>
+                <td>@i.Category</td>
+                <td>@i.PageCount</td>
+                <td>@i.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
