@@ -2,24 +2,11 @@
     ViewData["Title"] = "Home Page";
 }
 @model BooksViewModel
-<h1 class="justify-content-md-center">BOOK CATALOG</h1>
 
-<div class="container justify-content-md-center">
-    @foreach (Book b in Model.Books)
-    {
-        <div class="col">
-            <h3><b>@b.Title</b></h3>
-            <ul class="list-unstyled">
-                <li>Author: @b.Author</li>
-                <li>Publisher: @b.Publisher</li>
-                <li>Genre: @b.Category</li>
-                <li>Classification: @b.Classification</li>
-                <li>ISBN: @b.Isbn</li>
-                <li>Page Count: @b.PageCount</li>
-                <li>Price: $@b.Price</li>
-            </ul>
-        </div>
-    }
-</div>
+@foreach (Book b in Model.Books)
+{
+    //go to to partial view and pass in the book objects
+    <partial name="BookSummary" model="b"/>
+}
 <div page-model="@Model.PageInfo" page-action="Index" page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark"
      page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using mission9_mcurzon1.Models;
 using Microsoft.EntityFrameworkCore;
 
+// Matt Curzon mission 9 and 10 project creating a web app for a bookstore
 namespace mission9_mcurzon1
 {
     public class Startup
@@ -32,6 +33,9 @@ namespace mission9_mcurzon1
 
            });
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+            services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,16 +53,27 @@ namespace mission9_mcurzon1
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("categorypage",
+                    "{category}/Page{pageNum}",
+                    new { Controller= "Home", action= "Index" });
+                endpoints.MapControllerRoute(
+                    name: "Paging",
+                    pattern: "Page{pageNum}",
+                    defaults: new { Controller = "Home", action = "Index", pageNum=1 });
+                endpoints.MapControllerRoute("category", 
+                    "{category}", 
+                    new { Controller = "Home", action = "Index", pageNum=1});
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

@@ -1,0 +1,29 @@
+﻿@{
+}
+@model Book
+@*this is a partial view to display the contents of every book returned
+    I added a dark background to the cards and reformatted the size and layout of each card*@
+<div class="card text-white bg-dark m-1 p-1" style="max-width: 70rem;">
+    <div class=" card-header bg-opacity-75 p-1">
+        <h4>@Model.Title</h4>
+        <span class="badge bg-info" style="float:inline-end">
+            Price: $@Model.Price
+        </span>
+    </div>
+
+    <ul class="card-body list-unstyled">
+        <li>Author: @Model.Author</li>
+        <li>Publisher: @Model.Publisher</li>
+        <li>Genre: @Model.Category</li>
+        <li>Classification: @Model.Classification</li>
+        <li>ISBN: @Model.Isbn</li>
+        <li>Page Count: @Model.PageCount</li>
+    </ul>
+    <form method="post" asp-page="/Cart">
+        <input type="hidden" asp-for="@Model.BookId"/>
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()"/>
+        <span class="card-text">
+            <button type="submit" class="btn btn-success btn-sm float-end">Add to Cart</button>
+        </span>
+    </form>
+</div>

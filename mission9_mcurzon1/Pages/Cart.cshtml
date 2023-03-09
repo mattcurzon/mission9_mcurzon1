@@ -1,0 +1,47 @@
+﻿@page
+@model mission9_mcurzon1.Pages.CartModel
+@{
+}
+
+<h2 class="text-lg-center" style="font-family:'NanumGothic'">My Cart</h2>
+<br />
+
+@*reformatted the table to be centered and bolded the totals and changed the fonts*@
+<div class="row" style="font-family:'Gill Sans'">
+    <div class="col-3">
+    </div>
+    <div class="col-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model.basket.Items)
+                {
+                    <tr>
+                        <td>@i.Book.Title</td>
+                        <td>$@i.Book.Price</td>
+                        <td>@i.Quantity</td>
+                        <td>$@(i.Book.Price * i.Quantity)</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"><b>Total:</b></td>
+                    <td><b>@Model.basket.CalculateTotal().ToString("c")</b></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="col-3">
+    </div>
+</div>
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Continue Browsing</a>
+</div>
