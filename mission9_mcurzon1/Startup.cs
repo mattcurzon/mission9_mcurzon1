@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using mission9_mcurzon1.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 // Matt Curzon mission 9 and 10 project creating a web app for a bookstore
 namespace mission9_mcurzon1
@@ -33,9 +34,12 @@ namespace mission9_mcurzon1
 
            });
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+            services.AddScoped<IPurchaseRepository, EFPurchaseRepository > ();
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession();
+            services.AddScoped<Basket>(x => SessionBasket.GetBasket(x));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
