@@ -10,7 +10,7 @@ namespace mission9_mcurzon1.Models
     {
         private BookstoreContext context;
 
-        public void EFBookstoreRepository(BookstoreContext temp)
+        public EFPurchaseRepository(BookstoreContext temp)
         {
             context = temp;
         }
